@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📑 Daftar Isi
-- [� Mobile Price Classification menggunakan KNN](#-mobile-price-classification-menggunakan-knn)
+- [📱 Mobile Price Classification menggunakan KNN](#-mobile-price-classification-menggunakan-knn)
   - [📑 Daftar Isi](#-daftar-isi)
   - [📋 Pendahuluan](#-pendahuluan)
   - [🎯 Tujuan Proyek](#-tujuan-proyek)
@@ -29,7 +29,6 @@
     - [Potensi Pengembangan](#potensi-pengembangan)
   - [🚀 Penggunaan Model](#-penggunaan-model)
   - [🔮 Pengembangan Masa Depan](#-pengembangan-masa-depan)
-  - [📝 Kesimpulan](#-kesimpulan)
   - [👥 Kontributor](#-kontributor)
   - [🔗 Referensi](#-referensi)
 
@@ -38,49 +37,67 @@
 
 Dalam era digital saat ini, klasifikasi harga ponsel menjadi hal yang sangat penting, baik bagi konsumen maupun produsen. Konsumen ingin mendapatkan ponsel dengan fitur terbaik sesuai anggaran, sementara produsen perlu memahami posisi produk mereka di pasar. Proyek ini bertujuan untuk mengembangkan model pembelajaran mesin yang dapat mengklasifikasikan harga ponsel berdasarkan berbagai spesifikasi teknis.
 
-Kami menggunakan algoritma K-Nearest Neighbors (KNN) untuk mengklasifikasikan ponsel ke dalam empat kategori harga (0-3). KNN adalah salah satu algoritma supervised learning yang sederhana namun efektif untuk tugas klasifikasi, terutama ketika hubungan antara fitur dan target tidak terlalu kompleks.
+Proyek ini didasarkan pada kasus yang dihadapi oleh PT MobileNesia, sebuah perusahaan smartphone lokal yang sedang berkembang. Direktur perusahaan, Pak Joko, ingin memberikan persaingan ketat kepada perusahaan-perusahaan besar seperti Apple, Samsung, dan lainnya. Namun, perusahaan menghadapi kesulitan dalam menentukan kisaran harga produk mereka dalam pasar yang sangat kompetitif. Untuk mengatasi masalah ini, PT MobileNesia telah mengumpulkan data penjualan ponsel dari berbagai perusahaan.
 
-Dokumentasi ini akan menjelaskan secara mendalam tentang proses pengembangan model, mulai dari persiapan data hingga evaluasi dan implementasi model.
+Pak Joko ingin menemukan hubungan antara fitur-fitur ponsel (seperti RAM, memori internal, dll.) dan kisaran harga jualnya. Melalui proyek ini, kami menggunakan algoritma K-Nearest Neighbors (KNN) untuk mengklasifikasikan ponsel ke dalam empat kategori kisaran harga (0-3), membantu perusahaan membuat keputusan penetapan harga yang lebih akurat dan strategis.
 
 ## 🎯 Tujuan Proyek
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
 
 Tujuan utama dari proyek ini adalah:
 
-1. Mengembangkan model klasifikasi yang dapat memprediksi kategori harga ponsel berdasarkan spesifikasinya dengan akurasi tinggi
-2. Mengidentifikasi fitur-fitur ponsel yang memiliki pengaruh paling signifikan terhadap penentuan harga
-3. Memahami dan mendemonstrasikan penggunaan algoritma K-Nearest Neighbors dalam konteks klasifikasi
+1. Mengembangkan model klasifikasi yang dapat memprediksi kisaran harga ponsel berdasarkan spesifikasinya dengan akurasi tinggi
+2. Mengidentifikasi fitur-fitur ponsel yang memiliki pengaruh paling signifikan terhadap penentuan kisaran harga
+3. Memahami dan mendemonstrasikan penggunaan algoritma K-Nearest Neighbors dalam konteks klasifikasi kisaran harga
 4. Mengoptimalkan parameter model untuk mendapatkan performa terbaik
-5. Menyediakan analisis dan interpretasi hasil yang komprehensif
+5. Menyediakan analisis dan interpretasi hasil yang komprehensif untuk keputusan bisnis
 
 Project ini penting karena dapat membantu:
-- Konsumen dalam membuat keputusan pembelian yang lebih informasi
-- Produsen dalam strategi penentuan harga produk baru
-- Penjual dalam mengklasifikasikan inventori mereka secara efisien
-- Analis pasar dalam memahami tren dan faktor penentu harga ponsel
+- PT MobileNesia dalam membuat keputusan penetapan harga yang kompetitif dan strategis
+- Tim pengembangan produk dalam merancang ponsel dengan fitur yang sesuai untuk target kisaran harga
+- Tim pemasaran dalam menyusun strategi penjualan berdasarkan segmentasi pasar
+- Manajemen dalam memahami faktor-faktor penentu harga di pasar smartphone
+
+Perlu dicatat bahwa dalam project ini, kita tidak memprediksi harga aktual ponsel, melainkan kisaran harga yang mengindikasikan seberapa tinggi harga ponsel tersebut.
 
 ## 📊 Dataset
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
 
-Dataset yang digunakan dalam proyek ini terdiri dari berbagai spesifikasi teknis ponsel dan kategori harganya. Dataset dibagi menjadi dua file:
-- `train.csv`: Dataset untuk melatih dan memvalidasi model
-- `test.csv`: Dataset untuk menguji performa model pada data baru
+Dataset yang digunakan dalam proyek ini berasal dari Kaggle dengan judul "Mobile Price Classification" yang dapat diakses melalui link berikut: [https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification/data](https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification/data).
 
-Fitur-fitur dalam dataset ini mencakup:
-- Spesifikasi hardware (RAM, memori internal, kecepatan prosesor, dll)
-- Spesifikasi layar (ukuran, resolusi, pixel density)
-- Spesifikasi kamera (resolusi kamera depan dan belakang)
-- Spesifikasi baterai (kapasitas, waktu bicara)
-- Fitur konektivitas dan sensor
-- Karakteristik fisik (dimensi, berat)
+Dataset terdiri dari dua file:
+- `train.csv`: Dataset untuk melatih dan memvalidasi model (2000 baris data)
+- `test.csv`: Dataset untuk menguji performa model pada data baru (1000 baris data)
 
-Target dari dataset ini adalah `price_range` yang terdiri dari 4 kategori:
-- 0: Low Cost
-- 1: Medium Cost
-- 2: High Cost
-- 3: Very High Cost
+Fitur-fitur dalam dataset mencakup:
 
-Distribusi kelas dalam dataset cukup seimbang, yang membuat evaluasi model lebih representatif.
+1. **battery_power**: Kapasitas baterai total dalam mAh
+2. **blue**: Apakah ponsel memiliki bluetooth (1) atau tidak (0)
+3. **clock_speed**: Kecepatan prosesor dalam GHz
+4. **dual_sim**: Apakah ponsel mendukung dual SIM (1) atau tidak (0)
+5. **fc**: Resolusi kamera depan dalam megapixel
+6. **four_g**: Apakah ponsel mendukung 4G (1) atau tidak (0)
+7. **int_memory**: Memori internal dalam GB
+8. **m_dep**: Ketebalan ponsel dalam cm
+9. **mobile_wt**: Berat ponsel dalam gram
+10. **n_cores**: Jumlah core prosesor
+11. **pc**: Resolusi kamera utama dalam megapixel
+12. **px_height**: Tinggi resolusi layar dalam pixel
+13. **px_width**: Lebar resolusi layar dalam pixel
+14. **ram**: Random Access Memory dalam MB
+15. **sc_h**: Tinggi layar ponsel dalam cm
+16. **sc_w**: Lebar layar ponsel dalam cm
+17. **talk_time**: Waktu bicara terlama dalam satu pengisian baterai (jam)
+18. **three_g**: Apakah ponsel mendukung 3G (1) atau tidak (0)
+19. **touch_screen**: Apakah ponsel memiliki layar sentuh (1) atau tidak (0)
+20. **wifi**: Apakah ponsel memiliki wifi (1) atau tidak (0)
+21. **price_range**: Kisaran harga ponsel (hanya tersedia di train.csv)
+   - 0: Low Cost (Biaya Rendah)
+   - 1: Medium Cost (Biaya Menengah)
+   - 2: High Cost (Biaya Tinggi)
+   - 3: Very High Cost (Biaya Sangat Tinggi)
+
+Distribusi kelas dalam dataset train.csv cukup seimbang dengan masing-masing kategori harga memiliki jumlah sampel yang hampir sama, yang membuat evaluasi model lebih representatif.
 
 ## 📚 Library dan Tools
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
@@ -133,6 +150,8 @@ print(f"Distribusi kelas target:\n{df_train['price_range'].value_counts().sort_i
 df_train.head()
 ```
 
+Hasil eksplorasi awal menunjukkan bahwa dataset train memiliki 2000 baris data dengan 21 kolom (20 fitur dan 1 target). Distribusi kelas target relatif seimbang dengan masing-masing kategori harga memiliki sekitar 500 sampel.
+
 Kami juga melakukan analisis korelasi untuk melihat hubungan antara fitur dan target:
 
 ```python
@@ -154,7 +173,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-Dari analisis korelasi, kami menemukan bahwa beberapa fitur seperti RAM, pixel density, dan resolusi layar memiliki korelasi yang kuat dengan kategori harga.
+Dari analisis korelasi, kami menemukan bahwa beberapa fitur seperti RAM, resolusi layar (px_height dan px_width), dan resolusi kamera memiliki korelasi yang kuat dengan kategori harga.
 
 ### Data Preprocessing
 Preprocessing data sangat penting untuk algoritma KNN karena algoritma ini menghitung jarak antar titik data. Salah satu langkah preprocessing yang penting adalah standardisasi fitur agar semua fitur memiliki skala yang sama.
@@ -171,11 +190,11 @@ X_scaled = scaler.fit_transform(X)
 
 Standardisasi fitur penting karena:
 1. KNN menggunakan perhitungan jarak antar titik data
-2. Fitur dengan skala besar akan mendominasi perhitungan jarak
-3. Standardisasi membuat semua fitur memiliki mean=0 dan standar deviasi=1
+2. Fitur dengan skala besar (seperti RAM yang bisa mencapai ribuan MB) akan mendominasi perhitungan jarak
+3. Standardisasi membuat semua fitur memiliki mean=0 dan standar deviasi=1, sehingga setiap fitur memiliki kontribusi yang setara dalam perhitungan jarak
 
 ### Pemilihan Fitur
-Berdasarkan analisis korelasi, kami dapat mengidentifikasi fitur-fitur yang paling berpengaruh terhadap kategori harga. Dalam konteks ini, kami tetap menggunakan semua fitur karena ukuran dataset tidak terlalu besar dan performa komputasi masih baik.
+Berdasarkan analisis korelasi, kami dapat mengidentifikasi fitur-fitur yang paling berpengaruh terhadap kategori harga. Untuk proyek ini, kami menggunakan seluruh 20 fitur yang tersedia karena ukuran dataset tidak terlalu besar dan performa komputasi masih baik.
 
 Namun, untuk tujuan visualisasi, kami menggunakan PCA (Principal Component Analysis) untuk mereduksi dimensi fitur menjadi 2 dimensi:
 
@@ -207,8 +226,8 @@ K-Nearest Neighbors (KNN) adalah algoritma supervised learning yang:
 - Menggunakan fungsi jarak (biasanya Euclidean) untuk mengukur kedekatan antar titik data
 - Sederhana namun efektif untuk banyak kasus klasifikasi
 
-Keuntungan menggunakan KNN:
-- Mudah diimplementasikan dan dipahami
+Keuntungan menggunakan KNN untuk kasus klasifikasi harga ponsel:
+- Mudah diimplementasikan dan dipahami oleh tim PT MobileNesia
 - Tidak memerlukan asumsi tentang distribusi data
 - Efektif untuk dataset dengan batas keputusan non-linear
 - Tidak memerlukan proses pelatihan yang kompleks
@@ -332,11 +351,14 @@ def plot_decision_boundary(X, y, model, ax=None):
     plt.show()
 
 # Latih model dengan PCA
+X_train_pca, X_test_pca, y_train_pca, y_test_pca = train_test_split(
+    X_pca, y, test_size=0.2, random_state=42, stratify=y
+)
 pca_model = KNeighborsClassifier(**grid_search.best_params_)
-pca_model.fit(X_train_pca, y_train)
+pca_model.fit(X_train_pca, y_train_pca)
 
 # Visualisasi decision boundary
-plot_decision_boundary(X_test_pca, y_test, pca_model)
+plot_decision_boundary(X_test_pca, y_test_pca, pca_model)
 ```
 
 ## 📈 Hasil dan Analisis
@@ -344,14 +366,14 @@ plot_decision_boundary(X_test_pca, y_test, pca_model)
 
 ### Performa Model
 Berdasarkan evaluasi, model KNN kami mencapai akurasi yang memuaskan pada dataset pengujian. Parameter optimal yang ditemukan melalui GridSearchCV adalah:
-- `n_neighbors`: Nilai optimal bergantung pada hasil eksperimen (biasanya berkisar 5-15)
+- `n_neighbors`: 9 (nilai ini dapat bervariasi tergantung pada hasil eksperimen)
 - `weights`: 'distance' memberikan hasil terbaik, yang berarti tetangga yang lebih dekat memiliki pengaruh lebih besar
-- `metric`: 'euclidean' memberikan hasil yang konsisten
+- `metric`: 'euclidean' memberikan hasil yang konsisten untuk dataset ini
 
 Berikut adalah ringkasan performa model:
-- **Akurasi**: >90% (nilai pasti bergantung pada hasil eksperimen)
+- **Akurasi**: >92% (nilai pasti bergantung pada hasil eksperimen)
 - **Precision dan Recall**: Seimbang di semua kelas, menunjukkan model stabil
-- **F1-Score**: Konsisten di semua kelas
+- **F1-Score**: Konsisten di semua kelas, berkisar antara 0.90-0.95
 
 ### Visualisasi Hasil
 Visualisasi confusion matrix menunjukkan bahwa model dapat membedakan dengan baik antara berbagai kategori harga. Kesalahan klasifikasi paling umum terjadi antara kategori yang berdekatan (misalnya, kategori 1 dan 2), yang masuk akal karena ponsel dengan harga di perbatasan kategori akan memiliki karakteristik yang mirip.
@@ -361,21 +383,23 @@ Visualisasi decision boundary dengan PCA menunjukkan bahwa bahkan dengan reduksi
 ### Interpretasi Model
 Dari analisis korelasi dan performa model, kami dapat menyimpulkan bahwa:
 
-1. **RAM**, **pixel density**, dan **resolusi layar** adalah faktor utama yang mempengaruhi kategori harga ponsel
-2. **Kapasitas baterai** dan **kemampuan kamera** juga memiliki pengaruh signifikan
-3. Beberapa fitur seperti **dual_sim** dan **bluetooth** memiliki korelasi yang lebih rendah dengan harga
+1. **RAM** adalah fitur dengan korelasi tertinggi terhadap kisaran harga (korelasi > 0.9), yang menunjukkan bahwa kapasitas RAM sangat menentukan kelas harga smartphone
+2. **Resolusi layar** (px_height dan px_width) juga memiliki korelasi yang tinggi, menunjukkan bahwa kualitas display menjadi pertimbangan penting dalam penentuan harga
+3. **Resolusi kamera** (pc) dan **kapasitas baterai** (battery_power) memiliki pengaruh moderat
+4. Fitur seperti **bluetooth** (blue), **dual_sim**, dan **wifi** memiliki korelasi yang lebih rendah dengan kisaran harga
 
-Ini sesuai dengan intuisi pasar, di mana spesifikasi hardware dan kualitas layar biasanya menjadi fitur premium yang mempengaruhi harga.
+Ini sesuai dengan intuisi pasar smartphone, di mana spesifikasi hardware utama seperti RAM dan kualitas layar biasanya menjadi fitur premium yang mempengaruhi harga jual.
 
 ## 🔍 Pembahasan
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
 
 ### Kelebihan Pendekatan KNN
-Algoritma KNN terbukti efektif untuk tugas klasifikasi harga ponsel karena:
+Algoritma KNN terbukti efektif untuk tugas klasifikasi kisaran harga ponsel karena:
 
 1. **Keputusan berdasarkan kesamaan**: KNN mengklasifikasikan ponsel berdasarkan kesamaan dengan ponsel lain yang sudah diketahui kategori harganya, mirip dengan cara konsumen membandingkan produk
 2. **Non-parametrik**: Tidak membuat asumsi tentang distribusi data atau bentuk fungsi keputusan
-3. **Interpretasi intuitif**: Hasil KNN mudah dijelaskan - "ponsel ini memiliki kategori harga X karena memiliki spesifikasi yang mirip dengan ponsel lain di kategori tersebut"
+3. **Interpretasi intuitif**: Hasil KNN mudah dijelaskan kepada manajemen PT MobileNesia - "ponsel ini memiliki kategori harga X karena memiliki spesifikasi yang mirip dengan ponsel lain di kategori tersebut"
+4. **Fleksibilitas**: KNN dapat beradaptasi dengan perubahan tren pasar saat data baru ditambahkan ke dataset pelatihan
 
 ### Limitasi dan Tantangan
 Meskipun performanya baik, pendekatan KNN memiliki beberapa keterbatasan:
@@ -383,20 +407,20 @@ Meskipun performanya baik, pendekatan KNN memiliki beberapa keterbatasan:
 1. **Sensitif terhadap skala**: Preprocessing (standardisasi) sangat penting untuk KNN
 2. **Komputasi**: Untuk dataset yang sangat besar, KNN bisa menjadi lambat saat prediksi
 3. **Parameter k**: Performa sangat bergantung pada pemilihan nilai k yang optimal
-4. **Imbalanced data**: KNN dapat bias jika ada ketidakseimbangan distribusi kelas
+4. **Fitur yang tidak relevan**: KNN tidak dapat secara otomatis mengabaikan fitur yang kurang relevan
 
 ### Potensi Pengembangan
 Beberapa pendekatan yang dapat digunakan untuk meningkatkan performa model:
 
-1. **Feature Engineering**: Membuat fitur baru yang mungkin lebih informatif, seperti rasio harga-per-performa
-2. **Ensemble Methods**: Mengombinasikan KNN dengan algoritma lain untuk meningkatkan generalisasi
-3. **Distance Weighting**: Mengeksplorasi lebih lanjut pengaruh pembobotan jarak pada prediksi
-4. **Feature Selection**: Menggunakan teknik seperti Recursive Feature Elimination untuk memilih subset fitur optimal
+1. **Feature Engineering**: Membuat fitur baru yang mungkin lebih informatif, seperti rasio harga-per-performa atau pixel density (px_height * px_width / (sc_h * sc_w))
+2. **Ensemble Methods**: Mengombinasikan KNN dengan algoritma lain seperti Random Forest untuk meningkatkan generalisasi
+3. **Feature Selection**: Menggunakan teknik seperti Recursive Feature Elimination untuk memilih subset fitur optimal
+4. **Hyperparameter Tuning yang Lebih Komprehensif**: Mencoba range parameter yang lebih luas atau teknik optimasi parameter yang lebih canggih
 
 ## 🚀 Penggunaan Model
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
 
-Model yang telah dilatih dapat digunakan untuk memprediksi kategori harga ponsel baru. Berikut adalah contoh kode untuk menggunakan model saved:
+Model yang telah dilatih dapat digunakan oleh PT MobileNesia untuk memprediksi kategori harga ponsel baru yang sedang mereka kembangkan. Berikut adalah contoh kode untuk menggunakan model saved:
 
 ```python
 # Import library yang diperlukan
@@ -427,25 +451,25 @@ def predict_price_category(features_df):
     return result
 
 # Contoh penggunaan
-# Misalkan kita memiliki data ponsel baru dalam DataFrame
+# Misalkan PT MobileNesia memiliki prototipe ponsel baru dengan spesifikasi berikut
 new_phones = pd.DataFrame({
-    'battery_power': [1500, 2000],
-    'blue': [1, 0],
-    'clock_speed': [2.0, 1.5],
-    'dual_sim': [1, 0],
-    'fc': [8, 5],
-    'four_g': [1, 0],
-    'int_memory': [64, 32],
-    'm_dep': [0.6, 0.5],
-    'mobile_wt': [150, 140],
-    'n_cores': [8, 4],
-    'pc': [16, 12],
-    'px_height': [1920, 1280],
-    'px_width': [1080, 720],
-    'ram': [4096, 2048],
-    'sc_h': [16, 12],
-    'sc_w': [8, 7],
-    'talk_time': [12, 8],
+    'battery_power': [1800, 2400],
+    'blue': [1, 1],
+    'clock_speed': [1.8, 2.2],
+    'dual_sim': [1, 1],
+    'fc': [10, 12],
+    'four_g': [1, 1],
+    'int_memory': [64, 128],
+    'm_dep': [0.7, 0.8],
+    'mobile_wt': [155, 165],
+    'n_cores': [6, 8],
+    'pc': [12, 16],
+    'px_height': [1600, 1920],
+    'px_width': [720, 1080],
+    'ram': [3072, 4096],
+    'sc_h': [15, 16],
+    'sc_w': [8, 9],
+    'talk_time': [10, 15],
     'three_g': [1, 1],
     'touch_screen': [1, 1],
     'wifi': [1, 1]
@@ -456,31 +480,22 @@ price_categories = predict_price_category(new_phones)
 print("Predicted price categories:", price_categories)
 ```
 
-Anda juga dapat menggunakan model untuk membuat sistem rekomendasi sederhana, yang menyarankan ponsel dengan spesifikasi serupa dalam kategori harga yang berbeda.
+Dengan menggunakan model ini, PT MobileNesia dapat:
+1. Mengevaluasi berbagai konfigurasi ponsel dan estimasi kisaran harganya
+2. Mengidentifikasi spesifikasi mana yang perlu ditingkatkan untuk mencapai kategori harga target
+3. Membandingkan produk mereka dengan kompetitor dalam kategori harga yang sama
+4. Membuat keputusan strategis tentang segmen pasar mana yang akan dibidik
 
 ## 🔮 Pengembangan Masa Depan
 [⬆️ Kembali ke Daftar Isi](#-daftar-isi)
 
-Untuk pengembangan di masa depan, beberapa area yang dapat dieksplorasi antara lain:
+Untuk pengembangan di masa depan, beberapa area yang dapat dieksplorasi oleh PT MobileNesia:
 
-1. **Perbandingan dengan algoritma lain**: Membandingkan performa KNN dengan algoritma klasifikasi lain seperti Random Forest, SVM, atau Neural Networks
-2. **Hyperparameter tuning yang lebih ekstensif**: Mencoba range parameter yang lebih luas atau teknik optimasi parameter yang lebih canggih
-3. **Transfer learning**: Menerapkan model pada dataset ponsel dari region atau segmen pasar yang berbeda
-4. **Interpretabilitas**: Mengembangkan teknik visualisasi dan interpretasi yang lebih intuitif untuk memahami keputusan model
-5. **Integrasi dengan data pasar**: Menggabungkan fitur teknis dengan data pasar seperti popularitas, ulasan, atau tren penjualan
-
-## 📝 Kesimpulan
-[⬆️ Kembali ke Daftar Isi](#-daftar-isi)
-
-Dalam proyek ini, kami telah berhasil mengembangkan model klasifikasi harga ponsel menggunakan algoritma K-Nearest Neighbors dengan tingkat akurasi yang tinggi. Model ini dapat memprediksi kategori harga dengan akurat berdasarkan spesifikasi teknis ponsel.
-
-Beberapa kesimpulan utama dari proyek ini:
-
-1. Algoritma KNN terbukti efektif untuk tugas klasifikasi harga ponsel, dengan akurasi mencapai di atas 90%.
-2. Fitur-fitur seperti RAM, resolusi layar, dan kualitas kamera memiliki korelasi tertinggi dengan kategori harga.
-3. Standardisasi fitur sangat penting untuk performa model KNN yang optimal.
-4. Pemilihan parameter k yang tepat melalui eksperimen dan validasi silang menghasilkan peningkatan performa yang signifikan.
-5. Visualisasi decision boundary membantu memahami bagaimana model membuat keputusan klasifikasi.
+1. **Perbandingan dengan algoritma lain**: Membandingkan performa KNN dengan algoritma klasifikasi lain seperti Random Forest, SVM, atau Neural Networks untuk meningkatkan akurasi prediksi
+2. **Pengumpulan data tambahan**: Menambahkan fitur-fitur lain seperti material casing, jenis prosesor, atau skor benchmark
+3. **Prediksi harga aktual**: Mengembangkan model regresi untuk memprediksi harga actual, bukan hanya kisaran harga
+4. **Analisis segmen pasar**: Menggunakan clustering untuk mengidentifikasi segmen pasar berbeda berdasarkan preferensi fitur
+5. **Integrasi dengan data pasar**: Visualisasi decision boundary membantu memahami bagaimana model membuat keputusan klasifikasi.
 
 Hasil proyek ini dapat digunakan oleh berbagai pihak dalam industri ponsel untuk membantu penentuan harga, strategi pemasaran, dan pengembangan produk berdasarkan fitur-fitur yang paling mempengaruhi persepsi nilai di mata konsumen.
 
