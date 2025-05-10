@@ -1,4 +1,4 @@
-# 📱 Mobile Price Classification menggunakan KNN
+# 📱 Optimalisasi Parameter K-Nearest Neighbors dalam Penentuan Kategori Harga Smarthphone Berdasarkan Spesifikasi Teknis
 
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-orange.svg)](https://scikit-learn.org/)
